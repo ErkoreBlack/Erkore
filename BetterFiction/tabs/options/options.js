@@ -17,7 +17,9 @@ try {
     // storage blocked: use the default
 }
 if (savedView !== 'compact' && savedView !== 'detailed') {
-    savedView = window.matchMedia('(max-width: 700px)').matches ? 'detailed' : 'compact';
+    // Small screens and touch screens (iPad) get the detailed view: the compact one explains a setting only
+    // when you point at it, which a touch screen can't do
+    savedView = window.matchMedia('(max-width: 700px), (hover: none)').matches ? 'detailed' : 'compact';
 }
 showView(savedView);
 viewButtons.forEach((button) => {
